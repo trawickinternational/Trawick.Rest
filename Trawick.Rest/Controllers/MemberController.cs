@@ -50,8 +50,7 @@ namespace Trawick.Rest.Controllers
 				return Json("invalid auth code", JsonRequestBehavior.AllowGet);
 			}
 
-			RegexUtilities util = new RegexUtilities();
-			if (!util.IsValidEmail(email))
+			if (!Valid.Email(email))
 			{
 				return Json("invalid email/username", JsonRequestBehavior.AllowGet);
 			}
@@ -91,15 +90,14 @@ namespace Trawick.Rest.Controllers
 				return Json("invalid auth code", JsonRequestBehavior.AllowGet);
 			}
 
-			RegexUtilities util = new RegexUtilities();
-			Regex rx = new Regex(@"((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,11})");
-
-			if (!rx.IsMatch(password))
+			//Regex rx = new Regex(@"((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,11})");
+			//if (!rx.IsMatch(password))
+			if (!Valid.Password(password))
 			{
 				return Json("invalid password", JsonRequestBehavior.AllowGet);
 			}
 
-			if (!util.IsValidEmail(email))
+			if (!Valid.Email(email))
 			{
 				return Json("invalid email/username", JsonRequestBehavior.AllowGet);
 			}
@@ -148,7 +146,7 @@ namespace Trawick.Rest.Controllers
 
 
 
-		private static void SendEmailConfirm(int userID)
+		private void SendEmailConfirm(int userID)
 		{
 			// Invisible code. You just have to trust me.
 		}
