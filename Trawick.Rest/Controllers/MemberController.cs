@@ -72,7 +72,7 @@ namespace Trawick.Rest.Controllers
 
 			try
 			{
-				MemberRepo.Member_UpdateMember(member);
+				MemberRepo.UpdateMember(member);
 				return Json("update successful", JsonRequestBehavior.AllowGet);
 			}
 			catch (Exception ex)
@@ -115,7 +115,7 @@ namespace Trawick.Rest.Controllers
 
 			try
 			{
-				MemberRepo.Member_UpdateMember(member);
+				MemberRepo.UpdateMember(member);
 				SendEmailConfirm(userID);
 				return Json("register successful", JsonRequestBehavior.AllowGet);
 			}

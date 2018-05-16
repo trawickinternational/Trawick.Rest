@@ -50,7 +50,7 @@ namespace Trawick.Rest.Controllers
 			{
 				return Json("invalid member id", JsonRequestBehavior.AllowGet);
 			}
-			var agent = ContactRepo.Agent_GetByUserId(userID);
+			var agent = AgentRepo.Agent_GetByUserId(userID);
 			if (agent != null)
 			{
 				return Json(agent, JsonRequestBehavior.AllowGet);
