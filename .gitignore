@@ -1,1 +1,3 @@
 /.vs/Trawick.Rest/v14/*.suo
+/Trawick.Rest/bin
+/Trawick.Rest/obj
