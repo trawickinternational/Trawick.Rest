@@ -33,5 +33,12 @@ namespace Trawick.Rest.Controllers
             }
             return Json(new { }, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Agent_GetAllJson()
+        {
+            var model = Trawick.Data.Models.AgentRepo.GetAllActive();
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
     }
 }

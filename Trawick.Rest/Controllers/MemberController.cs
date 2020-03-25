@@ -152,5 +152,57 @@ namespace Trawick.Rest.Controllers
 		}
 
 
-	}
+        public ActionResult  MemberInfo(int MemberId )
+        {
+            var member = MemberRepo.Member_GetViewByMemberId(MemberId);
+            return Json(member, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult MemberLatestEnrollment(int MemberId)
+        {
+            var model = MemberRepo.Member_GetLatestEnrollIdByMemberId(MemberId);
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public ActionResult UpdateMemberDetails(int userID, string firstname, string lastname,string address1, string address2, string city, string state, string zip, string phone, string email, string passport)
+        {
+          
+
+            if (!string.IsNullOrEmpty(email)  && !Valid.Email(email))
+            {
+                return Json("invalid email/username", JsonRequestBehavior.AllowGet);
+            }
+
+            var member = MemberRepo.Member_GetById(userID);
+            if (member == null)
+            {
+                return Json("member not found", JsonRequestBehavior.AllowGet);
+            }
+
+            member.TryUpdateProperty(x => x.address1, address1);
+            member.TryUpdateProperty(x => x.firstname, firstname);
+            member.TryUpdateProperty(x => x.lastname, lastname);
+            member.TryUpdateProperty(x => x.address2, address2);
+            member.TryUpdateProperty(x => x.city, city);
+            member.TryUpdateProperty(x => x.state, state);
+            member.TryUpdateProperty(x => x.zip, zip);
+            member.TryUpdateProperty(x => x.phone1, phone);
+            member.TryUpdateProperty(x => x.email1, email);
+            member.TryUpdateProperty(x => x.passport, passport);
+
+            try
+            {
+                MemberRepo.UpdateMember(member);
+                return Json("update successful", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json("update error - " + ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+    }
+
 }
